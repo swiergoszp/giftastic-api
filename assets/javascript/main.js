@@ -37,43 +37,50 @@ $(document).ready(function() {
 
         $(".gifArea").empty();
         var pokemon = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" + pokemon + 
-                       "&api_key=Jd72kw6FN03BgBptJfnJ1Zf3J8ILXwf9";
+        // var queryURL = "https://api.giphy.com/v1/gifs/random?tag=" + pokemon + 
+        //                "&api_key=Jd72kw6FN03BgBptJfnJ1Zf3J8ILXwf9";
 
-        for (var i = 0; i < 10; i++) {
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        pokemon + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+        
             
-            // creates the ajax call for selected pokemon
-            $.ajax({
-            url: queryURL,
-            method: "GET"
-            }).then(function(response) {
+        // creates the ajax call for selected pokemon
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+        }).then(function(response) {
 
-                console.log(response);
+            var results = response.data;
 
-                    var pokeDiv = $("<div>");
-                        pokeDiv.addClass("pokeDiv");
-                    
-                    var gif = response.data.images.fixed_height.url;
-                    var image = response.data.images.fixed_height_still.url;
+            console.log(results);
 
-                    var pokeImage = $('<img class="pokeImage">');
-                        pokeImage.attr("src", image);
-                        pokeImage.attr("alt", "pokemon gif");
-                        pokeImage.attr("data-still", image);
-                        pokeImage.attr("data-animate", gif)
-                        pokeImage.attr("data-state", "still");
+            for (var i = 0; i < results.length; i++) {
 
-                    var getRating = response.Rated;
+                var pokeDiv = $("<div>");
+                    pokeDiv.addClass("pokeDiv");
+                
+                var gif = results[i].images.fixed_height.url;
+                var image = results[i].images.fixed_height_still.url;
 
-                    var rating = $('<p class="rating">').text("Rating: " + getRating);
+                var pokeImage = $('<img class="pokeImage">');
+                    pokeImage.attr("src", image);
+                    pokeImage.attr("alt", "pokemon gif");
+                    pokeImage.attr("data-still", image);
+                    pokeImage.attr("data-animate", gif)
+                    pokeImage.attr("data-state", "still");
 
-                    pokeDiv.prepend(pokeImage);
-                    pokeDiv.append(rating);
-                    $(".gifArea").append(pokeDiv);
+                var getRating = results[i].rating;
 
-            });
+                var rated = $('<p class="rating">').text("Rating: " + getRating);
 
-        };
+                pokeDiv.prepend(pokeImage);
+                pokeDiv.append(rated);
+                $(".gifArea").append(pokeDiv);
+
+            };
+
+        });
 
     }
 
