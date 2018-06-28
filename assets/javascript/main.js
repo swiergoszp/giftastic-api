@@ -63,7 +63,7 @@ $(document).ready(function() {
                 var gif = results[i].images.fixed_height.url;
                 var image = results[i].images.fixed_height_still.url;
 
-                var pokeImage = $('<img class="pokeImage">');
+                var pokeImage = $('<img class="pokeImage">'+'<br>');
                     pokeImage.attr("src", image);
                     pokeImage.attr("alt", "pokemon gif");
                     pokeImage.attr("data-still", image);
