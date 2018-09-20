@@ -5,7 +5,7 @@ A simple click and fetch site with a pokemon theme.
 
 The page operates on a series of buttons. Buttons labeled with pokemon names will fetch ten gifs using the giphy api related to the name on the button pressed. The page also allows the user to search for any pokemon they want. The search then creates a button with the same functionality as those on page load.
 
-
+https://swiergoszp.github.io/giftastic-api/
 
 
 
