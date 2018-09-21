@@ -1,5 +1,4 @@
-# giftastic-api
-api homework assignment
+# Pokemon Gif Scrapper
 
 A simple click and fetch site with a pokemon theme. 
 
